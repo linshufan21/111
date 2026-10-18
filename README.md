@@ -158,6 +158,7 @@ node scripts/restore.mjs backups/app-....db --force
 - **可观测性**：JSON 请求日志、`X-Request-ID`、`/metrics`（请求数、延迟分位、业务计数、DB 体积）、HTML 404/500、SIGTERM 优雅关闭。
 - **账号设置**：修改密码（其他设备立即下线）、登录设备列表与单设备退出、一次性退出其他设备、注销账号（内容匿名化、不可恢复）。
 - **管理台**：概览统计、分类分布、内容管理（精选/截止/重开/删除）、用户管理（停用/恢复；已注销账号只读）、举报队列（待处理/已处理/已驳回，标记处理/驳回/删除问题/停用作者）、审计日志（筛选/分页/详情，只读）。生产管理员用 `pnpm create:admin` 创建，不写入默认密码。
+- **合规草案**：`/privacy` 隐私政策、`/terms` 用户协议，页脚与登录页可进入；明确数据收集、Cookie、注销匿名化、跨境与未成年人条款。
 - **状态**：骨架屏、空态、错误重试、Toast、移动端适配、键盘可用。
 
 ![管理台](screenshots/admin.png)
@@ -179,6 +180,8 @@ node scripts/restore.mjs backups/app-....db --force
 ![邮箱验证](screenshots/verify-email-sent.png)
 
 ![找回密码](screenshots/forgot-password.png)
+
+![隐私政策](screenshots/privacy.png)
 
 ## 技术栈
 
@@ -236,6 +239,7 @@ node server/seed.mjs --force
 ## 已知边界
 
 - 单机部署，无自有域名；生产邮件需自行申请 Brevo/Resend 免费 key，当前不再依赖开发邮件箱。真实 SMTP/退信处理仍待完善。
+- 隐私政策与用户协议是**草案**，公开运营前必须由运营者补充真实联系方式并请法务复核；尚未实现 Cookie 同意弹窗。
 - 邮箱地址暂不支持修改；找回密码依赖 Brevo/Resend 或开发邮件箱。
 - 登录失败锁定保存在 SQLite；IP 限流与投票分钟限保存在进程内存，重启后清空。
 - 敏感词是归一化后的子串匹配，不是语义审核；词表可在 `config/blocklist.txt` 调整。

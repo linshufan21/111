@@ -15,6 +15,7 @@
 - `scripts/create-admin.mjs`：生产管理员初始化，不再使用默认密码；首次启动即可创建已验证管理员。
 - 免费上线方案：Caddy 自动 HTTPS、systemd 服务、`deploy/install.sh` 一键安装、`docs/LAUNCH.md`。
 - Docker/Nginx 之外的原生 Node + Caddy 部署路径，适合 Oracle Cloud Always Free / GCP e2-micro。
+- `/privacy` 隐私政策与 `/terms` 用户协议草案，页脚与登录页入口；注销匿名化、Cookie、跨境与未成年人条款。
 
 ### 新增
 

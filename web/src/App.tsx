@@ -4,6 +4,7 @@ import { Admin } from './pages/Admin'
 import { DevMail } from './pages/DevMail'
 import { Feed } from './pages/Feed'
 import { ForgotPassword } from './pages/ForgotPassword'
+import { Privacy, Terms } from './pages/Legal'
 import { Login } from './pages/Login'
 import { Me } from './pages/Me'
 import { NotFound } from './pages/NotFound'
@@ -41,6 +42,8 @@ export function App() {
       <Routes>
         <Route path="/" element={<Feed />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/q/:id" element={<Question />} />
         <Route path="/me" element={<Me />} />
         <Route path="/notifications" element={<Notifications />} />

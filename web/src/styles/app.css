@@ -2093,3 +2093,90 @@ a.report-question:hover {
     font-size: 9px;
   }
 }
+
+/* ================= 隐私政策 / 用户协议 ================= */
+.legal-shell {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 46px 0 20px;
+}
+
+.legal-shell h1 {
+  margin: 6px 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.legal-meta {
+  margin: 0 0 24px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.legal-card {
+  padding: 30px 32px 26px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.legal-intro {
+  margin: 0 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--line);
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.legal-section + .legal-section {
+  margin-top: 24px;
+}
+
+.legal-section h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.legal-section p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.legal-note {
+  margin: 26px 0 0;
+  padding-top: 18px;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.legal-note a,
+.legal-back a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-back {
+  margin: 18px 0 0;
+  font-size: 12.5px;
+}
+
+@media (max-width: 640px) {
+  .legal-shell {
+    padding-top: 30px;
+  }
+
+  .legal-card {
+    padding: 22px 18px;
+  }
+}

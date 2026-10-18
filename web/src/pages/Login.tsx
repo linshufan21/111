@@ -327,6 +327,8 @@ export function Login() {
 
           <p className="auth-legal">
             登录即表示你同意做一个友善的投票者：不攻击、不泄露隐私、认真写理由。
+            <br />
+            继续即表示你已阅读 <Link to="/terms">用户协议</Link> 与 <Link to="/privacy">隐私政策</Link>。
           </p>
         </div>
 

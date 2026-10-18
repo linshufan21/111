@@ -27,6 +27,8 @@ export function Layout({ children }: { children: ReactNode }) {
             <Link to="/">广场</Link>
             <Link to={needVerify ? '/settings#email' : '/?compose=1'}>发起投票</Link>
             <Link to="/login">登录</Link>
+            <Link to="/privacy">隐私政策</Link>
+            <Link to="/terms">用户协议</Link>
           </nav>
           <p className="footer-copy">© {new Date().getFullYear()} 大家来决定 · 一个温和的公共投票实验</p>
         </div>

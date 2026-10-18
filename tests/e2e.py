@@ -24,6 +24,13 @@ def main() -> None:
         ctx = browser.new_context(viewport={"width": 1280, "height": 900}, locale="zh-CN")
         page = ctx.new_page()
 
+        # 合规页面（页脚入口）
+        page.goto(f"{BASE}/", wait_until="networkidle")
+        page.locator("footer").get_by_role("link", name="隐私政策").click()
+        expect(page.get_by_role("heading", name="隐私政策")).to_be_visible()
+        page.locator("footer").get_by_role("link", name="用户协议").click()
+        expect(page.get_by_role("heading", name="用户协议")).to_be_visible()
+
         # 注册
         page.goto(f"{BASE}/login", wait_until="networkidle")
         page.get_by_role("tab", name="注册").click()
