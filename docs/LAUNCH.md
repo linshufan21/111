@@ -138,7 +138,15 @@ sudo nano /etc/dajia/dajia.env
 sudo systemctl restart dajia
 ```
 
-### 6. 验收
+### 6. 上线前自检
+
+```bash
+sudo -u dajia bash -c 'set -a; . /etc/dajia/dajia.env; set +a; node /opt/dajia/scripts/preflight.mjs'
+```
+
+会检查 HTTPS 地址、CSRF_SECRET、Cookie、邮件 key、schema 版本、管理员、是否残留 `admin1234` / `demo1234`、备份与数据库目录权限。全部 `[ok]` 再对外。
+
+### 7. 验收
 
 ```bash
 curl -fsS https://你的域名/healthz

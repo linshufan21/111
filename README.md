@@ -69,6 +69,7 @@ docker compose -f docker-compose.yml -f docker-compose.https.yml up --build -d
 ```bash
 pnpm run ci                  # 本地模拟 CI：typecheck → build → test
 pnpm run ci --e2e            # 额外跑 Playwright（临时数据库，不污染演示数据）
+pnpm preflight               # 生产配置自检：HTTPS/密钥/邮件/管理员/默认密码
 node scripts/release.mjs --bump patch
 ```
 
@@ -200,7 +201,7 @@ decision-app/
 ├── docker-compose.https.yml Nginx TLS 覆盖
 ├── deploy/            nginx.conf / nginx.local.conf / gen-cert.sh / certs
 ├── config/            blocklist.txt 内容安全词表
-├── scripts/           dev / ci / release / create-admin / backup / restore / export-csv
+├── scripts/           dev / ci / release / create-admin / preflight / backup / restore / export-csv
 ├── server/            API、SQLite schema、schema-meta、health、log、metrics、error-page、notify、content、startup、runtime config
 ├── web/src/
 │   ├── api/           契约类型与 fetch 客户端
