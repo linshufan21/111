@@ -92,12 +92,22 @@
 - GitHub Actions 使用主版本标签；高安全场景应按 commit SHA 固定 action。
 - 发布包与镜像不包含 `.env`、数据库、备份、证书、测试与截图。
 
+## 邮件与密钥
+
+- `BREVO_API_KEY` / `RESEND_API_KEY` 只放在 `/etc/dajia/dajia.env`（0600，root:root）或部署平台 secret 中，不写进仓库、日志或发布包。
+- 生产环境未配置邮件 key 时 `/healthz` 显示 `"mail":"disabled"`，注册验证和找回密码无法送达。
+- Brevo/Resend 会看到收件邮箱与邮件正文；这是发送邮件的必要第三方处理，已在隐私政策中披露。
+- 密码重置邮件不等待外部 API 返回，避免通过响应时间判断邮箱是否存在。
+
 ## 部署检查清单
 
-- [ ] 全站 HTTPS，HTTP 跳转 HTTPS。
+- [ ] 全站 HTTPS，HTTP 跳转 HTTPS（Caddy 或 Nginx）。
 - [ ] 反向代理后设置 `TRUST_PROXY=1`，并确认代理传递 `X-Forwarded-Proto` / `X-Forwarded-For`。
 - [ ] 生产设置稳定的 `CSRF_SECRET`（至少 32 字节随机值）。
 - [ ] 确认 `NODE_ENV=production`，开发邮件箱关闭。
+- [ ] 用 `scripts/create-admin.mjs` 创建管理员，确认默认 `admin1234` 不存在。
+- [ ] 配置 Brevo/Resend key，确认 `/healthz` 的 `mail` 不为 `disabled`，并完成一次真实收信。
 - [ ] 观察 CSP report，再决定是否切换强制模式。
 - [ ] 检查 `/api/csrf` 的 `Set-Cookie` 带 `Secure` 且不带 `HttpOnly`。
 - [ ] 用跨站表单验证写接口返回 403。
+- [ ] 隐私政策/用户协议已补充真实联系方式并请法务复核。

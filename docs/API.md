@@ -41,7 +41,7 @@ Base URL: `/api`。除 `GET /auth/verify` 的 303 跳转外，请求/响应均�
 | `TOO_MANY_ATTEMPTS` | 429 | 登录限流 |
 | `ACCOUNT_LOCKED` | 429 | 账号连续登录失败被锁定 15 分钟 |
 | `TOO_MANY_REQUESTS` | 429 | 验证邮件发送过于频繁 |
-| `MAIL_SEND_FAILED` | 502 | 验证邮件发送失败（生产环境未配置 SMTP） |
+| `MAIL_SEND_FAILED` | 502 | 验证邮件发送失败（生产环境未配置 Brevo/Resend 或 API 返回错误） |
 
 ## CSRF 与 Cookie
 
@@ -119,7 +119,7 @@ Cookie 属性：
 ```
 → `201 { "user": { ..., "emailVerified": false }, "verificationSent": true, "csrfToken": "..." }` + `Set-Cookie: dd_session` + 轮换后的 `dd_csrf`
 
-注册后即登录，但邮箱默认未验证。开发环境验证邮件写入控制台和 `/dev/mail`；生产环境在 Day 21 接入真实 SMTP 前不会投递，此时 `verificationSent=false`，前端展示 `send-failed` 状态。
+注册后即登录，但邮箱默认未验证。开发环境验证邮件写入控制台和 `/dev/mail`；生产环境需配置 Brevo/Resend HTTPS API，否则 `verificationSent=false`，前端展示 `send-failed` 状态。
 
 ### POST /auth/login
 ```json
@@ -177,7 +177,7 @@ Cookie 属性：
 - 已验证：`409 EMAIL_ALREADY_VERIFIED`
 - 注册后的第一封不计入冷却；从第二次发送起，60 秒内重复请求返回 `429 TOO_MANY_REQUESTS`
 - 重发会作废旧 token
-- 生产环境无 SMTP 时返回 `502 MAIL_SEND_FAILED`
+- 生产环境未配置 Brevo/Resend 或发送失败时返回 `502 MAIL_SEND_FAILED`
 
 ### GET /meta
 → `200 { "requireEmailVerification": true, "devMail": true }`

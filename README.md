@@ -73,6 +73,7 @@ node scripts/release.mjs --bump patch
 ```
 
 - push / PR 运行 GitHub Actions 的类型检查、构建与测试，并上传 `dist`；
+- E2E 独立为手动工作流 `.github/workflows/e2e.yml`，不阻塞日常 PR；
 - 推送 `v*` tag 会生成 `release/dajia-decides-<version>.tar.gz`、`manifest.json`、`SHA256SUMS` 与 GitHub Release；
 - 发布包含版本、commit、schema 版本与逐文件 SHA-256；`/healthz` 可核对线上版本。
 - 完整流程、参数与回滚见 [docs/RELEASE.md](docs/RELEASE.md)。

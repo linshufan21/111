@@ -1,6 +1,6 @@
 # 开发路线图 · 一天一个可验收增量
 
-> 基线：当前仓库已有核心闭环、管理员台、40 项测试、E2E 与截图。
+> 基线：当前仓库已有核心闭环、管理员台、44 项测试、E2E 与截图。
 > 原则：每天一个可独立上线/回滚的增量；先安全与治理，再部署与增长；外部依赖放最后。
 
 ## 总览
@@ -57,7 +57,7 @@
   - 注册发验证邮件；开发环境把链接写入日志/`/dev/mail` 页面
   - `GET /api/auth/verify?token`、`POST /api/auth/resend-verification`
   - 未验证限制：可浏览/投票，不能发问题（`REQUIRE_VERIFIED_TO_POST` 可配置）
-  - `SMTP_URL` 预留在 `.env.example`；Day 2 使用 console transport，真实发信留到 Day 21
+  - `MAIL_FROM` 预留；Day 2 使用 console transport，真实发信在 Day 21 接入（现已提前支持 Brevo/Resend）
 - **验收**：注册 → 日志取链接 → 验证 → 可发帖；过期/复用 token 被拒绝。
 - **依赖**：无；真实发信留到 Day 21。
 
@@ -280,7 +280,7 @@
 ### Day 21 · 真实邮件
 > 🟡 部分提前完成（2026-10-18）：已接入 Brevo / Resend HTTPS API，生产可发验证/重置邮件；剩余退信处理、发送限额监控、自有域名 SPF/DKIM。
 - 接 SMTP/API（SendGrid、阿里云邮件推送等），模板、退信处理、发送限额。
-- **需要**：SMTP 凭证、发信域名 SPF/DKIM。
+- **需要**：邮件 API key（Brevo/Resend）或 SMTP 凭证、发信域名 SPF/DKIM。
 
 ### Day 22 · OAuth 登录
 - GitHub / Google 登录，账号绑定与解绑。
