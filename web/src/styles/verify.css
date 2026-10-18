@@ -1,0 +1,330 @@
+/* ================= 邮箱验证 ================= */
+.verify-banner {
+  border-bottom: 1px solid #f1c7b7;
+  background: var(--accent-soft);
+  color: #8e3523;
+}
+
+.verify-banner-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 9px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.verify-banner strong {
+  font-weight: 700;
+}
+
+.verify-banner-link {
+  flex: 0 0 auto;
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.verify-banner-link:hover {
+  color: var(--accent);
+}
+
+.verify-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 64px 0 100px;
+}
+
+.verify-card {
+  position: relative;
+  padding: 42px 40px 38px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  overflow: hidden;
+}
+
+.verify-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 12px, transparent 12px 20px);
+  opacity: 0.7;
+}
+
+.verify-card-ok::before {
+  background: var(--yes);
+  opacity: 0.55;
+}
+
+.verify-card-warn::before {
+  background: var(--no);
+  opacity: 0.55;
+}
+
+.verify-mark {
+  width: 62px;
+  height: 62px;
+  margin: 18px auto 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.verify-mark-info {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.verify-mark-ok {
+  background: var(--yes-soft);
+  color: var(--yes);
+}
+
+.verify-mark-warn {
+  background: var(--no-soft);
+  color: var(--no);
+}
+
+.verify-card h1 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.verify-body {
+  max-width: 470px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.verify-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.verify-dev-hint {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+  color: #9a9384;
+  font-size: 10.5px;
+  line-height: 1.7;
+}
+
+.verify-dev-hint a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ================= 开发邮件箱 ================= */
+.devmail-shell {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 0 90px;
+}
+
+.devmail-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.devmail-head h1 {
+  margin: 7px 0 4px;
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.devmail-head p:last-child {
+  font-size: 11.5px;
+}
+
+.devmail-list {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.devmail-item {
+  padding: 18px 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.devmail-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.devmail-time {
+  margin-left: auto;
+  color: #9a9384;
+}
+
+.devmail-item h2 {
+  margin: 10px 0 6px;
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.devmail-text {
+  white-space: pre-wrap;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.8;
+  word-break: break-word;
+}
+
+.devmail-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 1px dashed var(--line);
+  font-size: 10px;
+}
+
+.devmail-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ================= 设置页邮箱区块 ================= */
+.settings-email-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 16px 18px;
+  background: rgba(239, 232, 216, 0.35);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+}
+
+.settings-email-copy {
+  min-width: 0;
+}
+
+.settings-email-copy strong {
+  font-size: 15px;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+.settings-email-copy p {
+  margin-top: 4px;
+  max-width: 570px;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.75;
+}
+
+.settings-email-copy .settings-dev-link {
+  margin-top: 7px;
+  font-size: 10.5px;
+  color: #9a9384;
+}
+
+.settings-dev-link a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.settings-email-row > .btn {
+  flex: 0 0 auto;
+}
+
+/* ================= 管理台：未验证标签 ================= */
+.user-unverified {
+  height: 18px;
+  margin-left: 6px;
+  padding: 0 5px;
+  font-size: 9px;
+  vertical-align: 1px;
+  background: #fdf1d8;
+  border-color: #e8d0a0;
+  color: #8a5b10;
+}
+
+@media (max-width: 760px) {
+  .verify-banner-inner {
+    padding: 9px 16px;
+    gap: 4px;
+  }
+
+  .verify-shell {
+    padding: 30px 0 70px;
+  }
+
+  .verify-card {
+    padding: 32px 20px 30px;
+    border-radius: 18px;
+  }
+
+  .verify-card h1 {
+    font-size: 27px;
+  }
+
+  .verify-mark {
+    width: 54px;
+    height: 54px;
+    margin-top: 12px;
+  }
+
+  .verify-actions {
+    gap: 8px;
+  }
+
+  .devmail-shell {
+    padding-top: 24px;
+  }
+
+  .devmail-head h1 {
+    font-size: 28px;
+  }
+
+  .settings-email-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .settings-email-row > .btn {
+    width: 100%;
+  }
+}

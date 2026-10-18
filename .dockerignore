@@ -1,0 +1,17 @@
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+node_modules
+dist
+server/data
+backups
+exports
+release
+.github
+screenshots
+tests
+docs
+__pycache__
+*.log

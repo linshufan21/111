@@ -1,0 +1,44 @@
+services:
+  app:
+    environment:
+      APP_URL: ${APP_URL:-https://localhost}
+      COOKIE_SECURE: "1"
+      TRUST_PROXY: "1"
+      # 由 Nginx 生产配置统一发送 HSTS；本地自签保持关闭。
+      HSTS: "0"
+
+  certgen:
+    image: alpine:3.20
+    profiles: ["cert"]
+    volumes:
+      - ./deploy/certs:/certs
+    command:
+      - sh
+      - -c
+      - |
+        apk add --no-cache openssl
+        openssl req -x509 -nodes -newkey rsa:2048 -days 365 \
+          -keyout /certs/privkey.pem \
+          -out /certs/fullchain.pem \
+          -subj "/CN=localhost" \
+          -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+        chmod 600 /certs/privkey.pem
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${NGINX_CONF:-./deploy/nginx.local.conf}:/etc/nginx/nginx.conf:ro
+      - ./deploy/certs:/etc/nginx/certs:ro
+      - certbot-webroot:/var/www/certbot
+      - nginx-cache:/var/cache/nginx
+
+volumes:
+  certbot-webroot:
+  nginx-cache:

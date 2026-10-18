@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build release package
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.22.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve version
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and verify release
+        env:
+          GIT_SHA: ${{ github.sha }}
+        run: >-
+          node scripts/release.mjs
+          --version "${{ steps.version.outputs.version }}"
+          --allow-dirty
+          --docker
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ steps.version.outputs.version }}
+          path: |
+            release/dajia-decides-${{ steps.version.outputs.version }}.tar.gz
+            release/SHA256SUMS
+            release/${{ steps.version.outputs.version }}/manifest.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/dajia-decides-${{ steps.version.outputs.version }}.tar.gz
+            release/SHA256SUMS
+          body_path: release/${{ steps.version.outputs.version }}/RELEASE_NOTES.md
+          generate_release_notes: false

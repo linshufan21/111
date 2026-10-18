@@ -1,0 +1,24 @@
+# Caddy 生产配置：自动 HTTPS + 反向代理到本机 Node。
+# DAJIA_DOMAIN / ACME_EMAIL 由 /etc/systemd/system/caddy.service.d/dajia.conf 注入。
+{
+	email {$ACME_EMAIL:admin@example.com}
+}
+
+{$DAJIA_DOMAIN:localhost} {
+	encode zstd gzip
+
+	# 应用自身只监听 127.0.0.1:8787；Caddy 负责 80/443 与证书。
+	reverse_proxy 127.0.0.1:8787 {
+		header_up X-Real-IP {remote_host}
+	}
+
+	header {
+		Strict-Transport-Security "max-age=15552000"
+		-Server
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}

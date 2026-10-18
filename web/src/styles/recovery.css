@@ -1,0 +1,145 @@
+/* ================= 找回 / 重置密码 ================= */
+.recovery-shell {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 64px 0 100px;
+}
+
+.recovery-card {
+  position: relative;
+  padding: 40px 42px 32px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.recovery-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 12px, transparent 12px 20px);
+  opacity: 0.7;
+}
+
+.recovery-card h1 {
+  margin: 8px 0 10px;
+  font-size: 34px;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+
+.recovery-lede {
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.85;
+}
+
+.recovery-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.recovery-success {
+  margin-top: 20px;
+  padding: 18px 18px 16px;
+  background: rgba(230, 242, 236, 0.55);
+  border: 1px solid #bcdccb;
+  border-radius: 12px;
+}
+
+.recovery-success h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--yes);
+}
+
+.recovery-success p {
+  color: var(--ink-2);
+  font-size: 11.5px;
+  line-height: 1.8;
+}
+
+.recovery-success a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.recovery-warn {
+  background: var(--no-soft);
+  border-color: #e7c3b8;
+}
+
+.recovery-warn h2 {
+  color: var(--no);
+}
+
+.recovery-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.recovery-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.recovery-foot a:hover {
+  color: var(--ink);
+}
+
+.login-forgot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -7px;
+}
+
+.login-forgot a {
+  color: var(--accent-strong);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.login-forgot a:hover {
+  color: var(--accent);
+}
+
+.alert-ok {
+  background: var(--yes-soft);
+  border-color: #bcdccb;
+  color: var(--yes);
+}
+
+@media (max-width: 760px) {
+  .recovery-shell {
+    padding: 30px 0 70px;
+  }
+
+  .recovery-card {
+    padding: 30px 20px 24px;
+    border-radius: 18px;
+  }
+
+  .recovery-card h1 {
+    font-size: 28px;
+  }
+}

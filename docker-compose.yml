@@ -1,0 +1,45 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_VERSION: ${APP_VERSION:-}
+        GIT_SHA: ${GIT_SHA:-}
+    image: dajia-decides:local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      NODE_ENV: production
+      PORT: "8787"
+      HOST: "0.0.0.0"
+      APP_URL: ${APP_URL:-http://localhost:8787}
+      APP_VERSION: ${APP_VERSION:-}
+      GIT_SHA: ${GIT_SHA:-}
+      DB_PATH: /data/app.db
+      BACKUP_DIR: /data/backups
+      BLOCKLIST_PATH: /app/config/blocklist.txt
+      # 本地 HTTP 演示默认值；公网部署请设置强随机值并启用 HTTPS。
+      CSRF_SECRET: ${CSRF_SECRET:-local-compose-only-secret-change-me-32}
+      # Day 10 本地容器使用 HTTP；Day 11 Nginx 后改为 1 或删除。
+      COOKIE_SECURE: ${COOKIE_SECURE:-0}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      NOTIFY_WORKER: "1"
+      DEV_MAIL: "0"
+      REQUIRE_VERIFIED_TO_POST: "1"
+    volumes:
+      - app-data:/data
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8787/healthz').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  app-data:
