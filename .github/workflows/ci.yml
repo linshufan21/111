@@ -2,13 +2,10 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
   workflow_dispatch:
-    inputs:
-      e2e:
-        description: 额外运行 Playwright 端到端（需安装 Chromium，耗时更长）
-        type: boolean
-        default: false
 
 permissions:
   contents: read
@@ -56,7 +53,7 @@ jobs:
 
   e2e:
     name: Playwright E2E (optional)
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.e2e }}
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
