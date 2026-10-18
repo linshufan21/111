@@ -45,9 +45,14 @@ python tests/e2e.py
 | 触发 | 内容 |
 |---|---|
 | push / pull_request | Node 24、pnpm 11.22.0、`pnpm install --frozen-lockfile`、typecheck、build、test；上传 `dist` artifact |
-| workflow_dispatch（勾选 e2e） | 额外安装 Playwright Chromium，seed 临时数据库，启动服务，跑 `tests/e2e.py`，失败时上传 `server.log` |
 
-权限只有 `contents: read`；不注入任何密钥。E2E 是可选 job，不阻塞日常 PR。
+### `.github/workflows/e2e.yml`
+
+| 触发 | 内容 |
+|---|---|
+| workflow_dispatch（手动） | 安装 Playwright Chromium，seed 临时数据库，启动服务，跑 `tests/e2e.py`，失败时上传 `server.log` |
+
+权限只有 `contents: read`；不注入任何密钥。E2E 独立成手动工作流，不阻塞日常 PR。此前把 E2E 放进 CI 时使用了 job 级 `runner.temp`，GitHub 会拒绝整个工作流；现已改为 `/tmp` 并拆分。
 
 ### `.github/workflows/release.yml`
 
