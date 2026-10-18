@@ -99,6 +99,17 @@ DuckDNS 创建 `linshufan21.duckdns.org`，IP 填服务器公网 IPv4；等待�
 dig +short linshufan21.duckdns.org
 ```
 
+同时确认云厂商防火墙开放 22/80/443：
+
+- Oracle Cloud：实例所在 **Security List / NSG** 加入 0.0.0.0/0 的 TCP 80、443；Oracle 的 Ubuntu 镜像还可能自带 iptables 规则，执行：
+  ```bash
+  sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+  sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+  sudo netfilter-persistent save
+  ```
+- GCP：VPC 防火墙创建 `tcp:80,443` 入站规则，目标选该实例。
+- 不要把 8787 暴露到公网；应用只监听 `127.0.0.1`。
+
 ### 4. 一键安装
 
 ```bash
